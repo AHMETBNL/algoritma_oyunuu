@@ -374,6 +374,17 @@ body {
     box-shadow: 0 4px 12px rgba(2, 136, 209, 0.4);
 }
 
+/* btn-warning (Doğru Sırayı Gör) */
+.btn-warning {
+    background-color: #f57c00;
+    color: #fff;
+}
+.btn-warning:hover {
+    background-color: #e65100;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(245, 124, 0, 0.4);
+}
+
 /* ===== How To Play Modal Overlay ===== */
 .htp-overlay {
     position: fixed;

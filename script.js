@@ -3,13 +3,14 @@ const welcomeScreen = document.getElementById('welcomeScreen');
 const gameScreen = document.getElementById('gameScreen');
 const usernameInput = document.getElementById('usernameInput');
 const startButton = document.getElementById('startButton');
-const leaderboardBtn = document.getElementById('leaderboardBtn'); // NEW
+const leaderboardBtn = document.getElementById('leaderboardBtn');
 
 const levelBadge = document.getElementById('levelBadge');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const levelTitle = document.getElementById('levelTitle');
 const sortableList = document.getElementById('sortableList');
 const checkButton = document.getElementById('checkButton');
+const showAnswerButton = document.getElementById('showAnswerButton');
 const nextLevelButton = document.getElementById('nextLevelButton');
 const appContainer = document.querySelector('.app-container');
 
@@ -25,21 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
     startButton.addEventListener('click', startGame);
     checkButton.addEventListener('click', checkOrder);
     nextLevelButton.addEventListener('click', loadNextLevel);
-    leaderboardBtn.addEventListener('click', showWelcomeLeaderboard); // NEW
+    showAnswerButton.addEventListener('click', showCorrectAnswer);
+    leaderboardBtn.addEventListener('click', showWelcomeLeaderboard);
     document.getElementById('howToPlayBtn').addEventListener('click', showHowToPlay);
     document.getElementById('htpCloseBtn').addEventListener('click', closeHowToPlay);
     document.getElementById('htpGotItBtn').addEventListener('click', closeHowToPlay);
-    // Overlay dışına tıklayarak kapat
     document.getElementById('howToPlayModal').addEventListener('click', (e) => {
         if (e.target === document.getElementById('howToPlayModal')) closeHowToPlay();
     });
-    
-    // Allow pressing Enter to start
+
     usernameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') startGame();
     });
-    
-    // Start matrix background
+
     initMatrixBackground();
 });
 
@@ -93,8 +92,9 @@ function loadLevel(index) {
     levelBadge.textContent = level.badge;
     levelTitle.textContent = level.title;
     
-    // Hide next button, show check button
+    // Hide next/answer buttons, show check button
     nextLevelButton.classList.add('hidden');
+    showAnswerButton.classList.add('hidden');
     checkButton.classList.remove('hidden');
     checkButton.disabled = false;
     
@@ -135,25 +135,40 @@ function checkOrder() {
     const currentItems = Array.from(sortableList.children);
     const level = activeGameLevels[currentLevelIndex];
     const correctSteps = level.steps;
-    let isAllCorrect = true;
-    
+    let wrongCount = 0;
+
     currentItems.forEach((item, index) => {
         const itemId = item.dataset.id;
         const expectedId = correctSteps[index].id;
-        
+
+        item.classList.remove('wrong', 'correct');
+
         if (itemId !== expectedId) {
-            isAllCorrect = false;
+            wrongCount++;
             item.classList.add('wrong');
+        } else {
+            item.classList.add('correct');
         }
     });
-    
-    if (isAllCorrect) {
+
+    if (wrongCount === 0) {
+        // Tüm sıralama doğru → seviye puanı ekle
         handleSuccess(level.baseScore);
     } else {
-        // Immediate elimination if wrong
+        // Her yanlış girişimde sabit -500 puan cezası (eksi olabilir)
+        const penalty = 500;
+        totalScore -= penalty;
+        updateScoreDisplay();
+
+        // Puan cezası bildirimi göster
+        showPenaltyNotice(wrongCount, penalty);
+
+        // 1.2s sonra renkleri temizle ve “Doğru Sırayı Gör” butonunu göster
         setTimeout(() => {
-            showEliminationScreen();
-        }, 600); // Wait a bit to show the shake animation
+            currentItems.forEach(item => item.classList.remove('wrong', 'correct'));
+            checkButton.classList.add('hidden');
+            showAnswerButton.classList.remove('hidden');
+        }, 1200);
     }
 }
 
@@ -164,20 +179,82 @@ function handleSuccess(pointsEarned) {
         item.classList.remove('wrong');
         item.classList.add('correct');
     }
-    
-    // Update score
+
     totalScore += pointsEarned;
     updateScoreDisplay();
-    
-    // Trigger confetti
     triggerConfetti();
-    
-    // Update UI
+
     checkButton.classList.add('hidden');
+    showAnswerButton.classList.add('hidden');
     nextLevelButton.classList.remove('hidden');
-    
-    // Disable dragging
+
     sortableInstance.options.disabled = true;
+}
+
+// Doğru sırayı göster ve Sonraki Seviye butonunu aç
+ function showCorrectAnswer() {
+    const level = activeGameLevels[currentLevelIndex];
+    const correctSteps = level.steps;
+
+    // Kartları doğru sıraya diz (DOM'u yeniden oluştur)
+    sortableList.innerHTML = '';
+    correctSteps.forEach((step, idx) => {
+        const li = document.createElement('li');
+        li.className = 'sortable-item correct';
+        li.dataset.id = step.id;
+        li.innerHTML = `
+            <i class="fas fa-check item-icon" style="color:#4caf50"></i>
+            <span class="item-step-num" style="
+                min-width:24px; height:24px; border-radius:50%;
+                background:rgba(76,175,80,0.2); color:#4caf50;
+                display:flex; align-items:center; justify-content:center;
+                font-weight:700; font-size:0.8rem; flex-shrink:0;">${idx + 1}</span>
+            <span class="item-text">${step.text}</span>
+        `;
+        sortableList.appendChild(li);
+    });
+
+    // Sürüklemeyi devre dışı bırak
+    if (sortableInstance) sortableInstance.options.disabled = true;
+
+    // “Doğru Sırayı Gör” butonunu gizle, Sonraki Seviye göster
+    showAnswerButton.classList.add('hidden');
+    nextLevelButton.classList.remove('hidden');
+    nextLevelButton.textContent = '';
+    nextLevelButton.innerHTML = 'Sonraki Seviye <i class="fas fa-arrow-right"></i>';
+}
+
+// Ceza bildirimi — kısa süreliğine ekranda göster
+function showPenaltyNotice(wrongCount, penalty) {
+    const existing = document.getElementById('penaltyNotice');
+    if (existing) existing.remove();
+
+    const notice = document.createElement('div');
+    notice.id = 'penaltyNotice';
+    notice.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        ${wrongCount} yanlış kutucuk &nbsp;→&nbsp; <strong>-${penalty} puan ceza!</strong>
+        <br><small>Sıralamayı düzelt ve tekrar dene!</small>
+    `;
+    notice.style.cssText = `
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #b71c1c;
+        color: #fff;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        z-index: 9999;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        animation: htpFadeIn 0.3s ease;
+        line-height: 1.6;
+    `;
+    document.body.appendChild(notice);
+    setTimeout(() => { if (notice.parentNode) notice.remove(); }, 2500);
 }
 
 function updateScoreDisplay() {

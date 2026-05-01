@@ -18,7 +18,6 @@ const gameLevels = [
         title: "Günlük Kalori Açığı Hesaplama Algoritması",
         baseScore: 500,
         steps: [
-            { id: "step1", text: "Gün içinde yiyeceklerden alınan toplam kaloriyi hesapla." },
             { id: "step2", text: "Bazal metabolizma ve antrenmanla yakılan toplam kaloriyi hesapla." },
             { id: "step3", text: "Yakılan toplam kaloriden, alınan toplam kaloriyi çıkar." },
             { id: "step4", text: "Sonuç pozitifse ekrana 'Kalori Açığındasın', negatifse 'Fazla Kalori Aldın' yazdır." }
@@ -81,8 +80,8 @@ const gameLevels = [
         baseScore: 500,
         steps: [
             { id: "step1", text: "int main() fonksiyonunu aç." },
-            { id: "step2", text: "int yas = 21; şeklinde bir tamsayı değişkeni tanımla." },
-            { id: "step3", text: "float boy = 1.87; şeklinde bir ondalıklı değişken tanımla." },
+            { id: "step2", text: "float boy = 1.87; şeklinde bir ondalıklı değişken tanımla." },
+            { id: "step3", text: "printf(\"boyunuz:%f\", boy);" },
             { id: "step4", text: "Kodu derle ve ekrandaki çıktıyı kontrol et." }
         ]
     },

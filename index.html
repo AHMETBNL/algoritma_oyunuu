@@ -63,6 +63,9 @@
                 <button id="checkButton" class="btn btn-primary">
                     <i class="fas fa-check-circle"></i> Kontrol Et
                 </button>
+                <button id="showAnswerButton" class="btn btn-warning hidden">
+                    <i class="fas fa-eye"></i> Doğru Sırayı Gör
+                </button>
                 <button id="nextLevelButton" class="btn btn-success hidden">
                     Sonraki Seviye <i class="fas fa-arrow-right"></i>
                 </button>
@@ -97,11 +100,15 @@
                 </div>
                 <div class="htp-rule">
                     <span class="htp-rule-icon" style="background: rgba(76,175,80,0.2); color: #4caf50;"><i class="fas fa-check"></i></span>
-                    <div><strong>Doğru Sıra</strong><br><span>Tüm adımlar doğru sıradaysa puan kazanırsın</span></div>
+                    <div><strong>Doğru Sıra = Tam Puan</strong><br><span>Tüm adımlar doğru sıradaysa seviye puanını kazanırsın</span></div>
                 </div>
                 <div class="htp-rule">
-                    <span class="htp-rule-icon" style="background: rgba(244,67,54,0.2); color: #f44336;"><i class="fas fa-skull"></i></span>
-                    <div><strong>Tek Hata = Eleme!</strong><br><span>Yanlış sırada gönderirsen oyun biter</span></div>
+                    <span class="htp-rule-icon" style="background: rgba(244,67,54,0.2); color: #f44336;"><i class="fas fa-minus-circle"></i></span>
+                    <div><strong>Yanlış Deneme = -500 Puan Ceza</strong><br><span>Kontrol Et'e yanlış bastığında 500 puan düşer, tekrar deneyebilirsin!</span></div>
+                </div>
+                <div class="htp-rule">
+                    <span class="htp-rule-icon" style="background: rgba(3,218,198,0.2); color: #03dac6;"><i class="fas fa-redo"></i></span>
+                    <div><strong>Sınırsız Deneme</strong><br><span>Doğru sıraya getirinceye kadar sıralamaya devam et</span></div>
                 </div>
             </div>
 
