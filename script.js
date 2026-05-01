@@ -355,19 +355,31 @@ function showEliminationScreen() {
 function showWinScreen() {
     const leaderboard = saveScore();
     const leaderboardHTML = generateLeaderboardHTML(leaderboard);
-    
+
+    const kazandi = totalScore >= 2500;
+
+    const icon     = kazandi ? 'fas fa-trophy'       : 'fas fa-sad-tear';
+    const iconColor = kazandi ? 'var(--success-color)' : 'var(--error-color)';
+    const baslik   = kazandi ? `Tebrikler, ${username}!` : `Oyun Bitti, ${username}`;
+    const mesaj    = kazandi
+        ? `🎉 Ödül almaya hak kazandınız!`
+        : `😔 Maalesef ödül almaya hak kazanamadınız.<br><small style="color:#aaa;">Ödül için en az 2500 puan gerekiyor.</small>`;
+    const mesajRenk = kazandi ? 'var(--success-color)' : 'var(--error-color)';
+
     appContainer.innerHTML = `
         <div class="end-screen">
-            <i class="fas fa-trophy end-icon"></i>
-            <h2 class="end-title">Tebrikler : ${username}</h2>
+            <i class="${icon} end-icon" style="color: ${iconColor};"></i>
+            <h2 class="end-title">${baslik}</h2>
             <h3 style="margin-bottom: 10px; color: #fff;">Toplam Puan: ${totalScore}</h3>
-            <p class="end-text" style="color: var(--success-color); font-size: 1.2rem; font-weight: bold;">Ödül almaya hak kazandınız!</p>
+            <p class="end-text" style="color: ${mesajRenk}; font-size: 1.15rem; font-weight: bold;">${mesaj}</p>
             <button class="btn btn-primary" onclick="location.reload()" style="margin: 0 auto; margin-top: 20px;">
                 <i class="fas fa-redo"></i> Yeni Oyun
             </button>
             ${leaderboardHTML}
         </div>
     `;
+
+    if (kazandi) triggerConfetti();
 }
 
 // Confetti Animation
