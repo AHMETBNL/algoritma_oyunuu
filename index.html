@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algoritma Sıralama Oyunu</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Welcome Screen -->
+        <div id="welcomeScreen" class="welcome-screen">
+            <i class="fas fa-gamepad welcome-icon"></i>
+            <h1 class="welcome-title">Algoritma Sıralama Oyunu</h1>
+            <p class="welcome-text">Hoş geldiniz! Oynamak için lütfen bir kullanıcı adı girin.</p>
+            <div class="input-group">
+                <input type="text" id="usernameInput" placeholder="Adınız / Rumuzunuz" autocomplete="off">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button id="leaderboardBtn" class="btn btn-secondary" style="flex: 1; justify-content: center; background-color: #333; color: #fff;">
+                    <i class="fas fa-trophy"></i> Skorlar
+                </button>
+                <button id="startButton" class="btn btn-primary" style="flex: 2; justify-content: center;">
+                    <i class="fas fa-play"></i> Oyuna Başla
+                </button>
+            </div>
+        </div>
+
+        <!-- Game Screen (Hidden initially) -->
+        <div id="gameScreen" class="hidden">
+            <!-- Header / Level Info -->
+            <header class="level-header">
+                <div class="header-top">
+                    <div class="level-badge" id="levelBadge">Seviye 1</div>
+                    <div class="score-badge">Puan: <span id="scoreDisplay">0</span></div>
+                </div>
+                <h1 class="level-title" id="levelTitle">Problem Yükleniyor...</h1>
+                <p class="level-instruction">Kutucukları sürükleyerek mantıklı bir sıraya dizin.</p>
+            </header>
+
+            <!-- Sorting Area -->
+            <main class="game-board">
+                <ul id="sortableList" class="sortable-list">
+                    <!-- List items will be injected here via JavaScript -->
+                </ul>
+            </main>
+
+            <!-- Footer / Controls -->
+            <footer class="game-controls">
+                <button id="checkButton" class="btn btn-primary">
+                    <i class="fas fa-check-circle"></i> Kontrol Et
+                </button>
+                <button id="nextLevelButton" class="btn btn-success hidden">
+                    Sonraki Seviye <i class="fas fa-arrow-right"></i>
+                </button>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- SortableJS -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Game Data -->
+    <script src="data.js"></script>
+    <!-- Game Logic -->
+    <script src="script.js"></script>
+</body>
+</html>
