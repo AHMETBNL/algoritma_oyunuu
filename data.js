@@ -1,7 +1,7 @@
 const gameLevels = [
     {
         id: 1,
-        badge: "Seviye 1 (Basit)",
+        badge: "Seviye 1 (Kolay)",
         title: "Çay Demleme Algoritması",
         baseScore: 500,
         steps: [
@@ -14,7 +14,7 @@ const gameLevels = [
     },
     {
         id: 2,
-        badge: "Seviye 4 (Kolay)",
+        badge: "Seviye 1 (Kolay)",
         title: "Günlük Kalori Açığı Hesaplama Algoritması",
         baseScore: 500,
         steps: [
@@ -26,7 +26,7 @@ const gameLevels = [
     },
     {
         id: 3,
-        badge: "Seviye 7 (Kolay)",
+        badge: "Seviye 1 (Kolay)",
         title: "Instagram 'Photo Dump' Gönderisi Hazırlama Algoritması",
         baseScore: 500,
         steps: [
@@ -52,7 +52,7 @@ const gameLevels = [
     },
     {
         id: 5,
-        badge: "Seviye 5 (Orta)",
+        badge: "Seviye 2 (Orta)",
         title: "Havaalanı Stok Takip Sistemine Yeni Parça Girişi",
         baseScore: 1000,
         steps: [
@@ -65,7 +65,7 @@ const gameLevels = [
     },
     {
         id: 6,
-        badge: "Seviye 8 (Orta)",
+        badge: "Seviye 2 (Orta)",
         title: "Flutter'da Arayüz Oluşturma (Stateless Widget)",
         baseScore: 1000,
         steps: [
@@ -94,7 +94,7 @@ const gameLevels = [
 
     {
         id: 8,
-        badge: "Seviye 6 (Zor)",
+        badge: "Seviye 3 (Zor)",
         title: "ASP.NET Core MVC ile API'den Veri Çekip Listeleme",
         baseScore: 1500,
         steps: [
@@ -108,7 +108,7 @@ const gameLevels = [
     },
     {
         id: 9,
-        badge: "Seviye 9 (Zor)",
+        badge: "Seviye 3 (Zor)",
         title: "Unreal Engine 5 Karakter Zıplama Mekaniği (Blueprint)",
         baseScore: 1500,
         steps: [
