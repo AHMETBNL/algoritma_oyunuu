@@ -38,9 +38,9 @@ const gameLevels = [
     },
     {
         id: 4,
-        badge: "Seviye 4 (Yaratıcı)",
+        badge: "Seviye 1 (kolay)",
         title: "Bozulan Elektronik Cihazı 'Türk Usulü' Tamir Etme",
-        baseScore: 2000,
+        baseScore: 500,
         steps: [
             { id: "step1", text: "Çalışmayan cihazın (kumanda, TV vb.) önce fişini çek/tak veya pillerini kendi etrafında çevir." },
             { id: "step2", text: "Hala çalışmıyorsa cihazın yan veya üst kısmına avuç içiyle orta şiddette rasyonel bir darbe indir." },
@@ -63,9 +63,9 @@ const gameLevels = [
         ]
     }, {
         id: 6,
-        badge: "Seviye 6 (Günlük Yaşam)",
+        badge: "Seviye 1 (kolay)",
         title: "Kayıpsız Çamaşır Yıkama ve Asma Algoritması",
-        baseScore: 3000,
+        baseScore: 500,
         steps: [
             { id: "step1", text: "Kirli sepetini yere döküp beyazlar, siyahlar ve renkliler olarak üç kesin gruba ayır." },
             { id: "step2", text: "Makineye atacağın her kıyafetin cebini (peçete, kulaklık, bozuk para) son bir kez kontrol et." },
@@ -83,8 +83,7 @@ const gameLevels = [
             { id: "step1", text: "int main() fonksiyonunu aç." },
             { id: "step2", text: "int yas = 21; şeklinde bir tamsayı değişkeni tanımla." },
             { id: "step3", text: "float boy = 1.87; şeklinde bir ondalıklı değişken tanımla." },
-            { id: "step4", text: "printf(\"Yaş: %d, Boy: %.2f\", yas, boy); komutunu yaz." },
-            { id: "step5", text: "Kodu derle ve ekrandaki çıktıyı kontrol et." }
+            { id: "step4", text: "Kodu derle ve ekrandaki çıktıyı kontrol et." }
         ]
     },
     {
@@ -178,9 +177,9 @@ const gameLevels = [
     },
     {
         id: 15,
-        badge: "Seviye 6 (Sosyal Beceriler)",
+        badge: "Seviye 1 (orta)",
         title: "Yeni Tanışılan Birinin İsmini Unutma Krizi",
-        baseScore: 3000,
+        baseScore: 500,
         steps: [
             { id: "step1", text: "Karşıdaki kişi hararetle bir şeyler anlatırken onun adını tamamen unuttuğunu fark et ve çaktırma." },
             { id: "step2", text: "Sohbet esnasında ona direkt 'Sen, Kardeşim, Hocam' gibi joker hitap kelimeleri kullanarak idare et." },
@@ -216,9 +215,9 @@ const gameLevels = [
     },
     {
         id: 18,
-        badge: "Seviye 6 (Günlük Yaşam)",
+        badge: "Seviye 2 (orta)",
         title: "Dolmuşta Kalabalığı Yarıp 'Müsait Yerde' İnme Olayı",
-        baseScore: 3000,
+        baseScore: 1000,
         steps: [
             { id: "step1", text: "İneceğin durağa 300 metre kala kulaklığın tekini çıkarıp dış dünyayla bağlantı kur." },
             { id: "step2", text: "Kapıya doğru hamle yaparken önündeki insanlara hafifçe temas edip 'Pardon, müsade eder misiniz?' diyerek koridor aç." },
@@ -229,9 +228,9 @@ const gameLevels = [
     },
     {
         id: 19,
-        badge: "Seviye 6 (Yazılım)",
+        badge: "Seviye 2 (orta)",
         title: "GitHub'da Sıfırdan Repo Açıp İlk Commit'i Fırlatma",
-        baseScore: 3000,
+        baseScore: 1000,
         steps: [
             { id: "step1", text: "GitHub profiline gir, 'New' butonuna bas, projeye isim ver (README eklemeden boş repo oluştur)." },
             { id: "step2", text: "Bilgisayarında projenin klasörüne sağ tıkla, terminali aç ve 'git init' ile yerel Git izlemesini başlat." },
@@ -293,36 +292,11 @@ const gameLevels = [
         ]
     },
 
+
+    ,
+
     {
         id: 24,
-        badge: "Seviye 3 (Zor)",
-        title: "Veritabanına Yeni Bir Kullanıcı Kayıt Etme ve Şifre Doğrulama",
-        baseScore: 1500,
-        steps: [
-            { id: "step1", text: "Kullanıcıdan kayıt formundaki verileri (e-posta, şifre) al." },
-            { id: "step2", text: "Şifrenin en az 8 karakter, harf ve rakam içerdiğini doğrula." },
-            { id: "step3", text: "E-posta adresinin veritabanında önceden kayıtlı olup olmadığını kontrol et." },
-            { id: "step4", text: "Güvenlik için şifreyi geri döndürülemez bir algoritmaya (hash) sok." },
-            { id: "step5", text: "Kullanıcının verilerini (e-posta ve hashlenmiş şifre) veritabanına kaydet." },
-            { id: "step6", text: "Kullanıcıya 'Kayıt Başarılı' mesajı göster ve giriş sayfasına yönlendir." }
-        ]
-    }
-    ,
-    {
-        id: 25,
-        badge: "Seviye 2 (Orta)",
-        title: "Karşı Tarafı Sıkmayan Bir Sohbet Başlatma",
-        baseScore: 1000,
-        steps: [
-            { id: "step1", text: "Durduk yere yazmak yerine, paylaştığı bir story'den mantıklı bir konu yakala." },
-            { id: "step2", text: "Sade, net ve gereksiz iltifat barındırmayan bir tepki veya soru ilet." },
-            { id: "step3", text: "Mesajlara anında atlamak yerine doğal bir akışta, kendi meşguliyetinden vakit buldukça cevap ver." },
-            { id: "step4", text: "Konu bitmeye yakınsa uzatmak için zorlama, muhabbeti zirvede kes." },
-            { id: "step5", text: "Bu sayede gizemini koru ve bir sonraki sohbete açık kapı bırak." }
-        ]
-    },
-    {
-        id: 26,
         badge: "Seviye 2 (Orta)",
         title: "Evde Detaylı Temizlik (Vileda ve Toz Alma)",
         baseScore: 1000,
@@ -335,7 +309,7 @@ const gameLevels = [
         ]
     },
     {
-        id: 27,
+        id: 25,
         badge: "Seviye 2 (Orta)",
         title: "C Dilinde Diziyi Ters Çevirme",
         baseScore: 1000,
@@ -349,7 +323,7 @@ const gameLevels = [
     },
 
     {
-        id: 28,
+        id: 26,
         badge: "Seviye 3 (Zor)",
         title: "ASP.NET Core MVC ile API'den Veri Çekip Listeleme",
         baseScore: 1500,
@@ -360,6 +334,33 @@ const gameLevels = [
             { id: "step4", text: "Dönüştürme işlemi başarısız olursa veya liste boşsa hata fırlat." },
             { id: "step5", text: "Veriler sorunsuz alındıysa Model listesini View'a gönder." },
             { id: "step6", text: "View (Razor) içerisinde foreach döngüsü kullanarak verileri bir HTML tablosuna yazdır." }
+        ]
+    },
+    {
+        id: 27,
+        badge: "Seviye 3 (Zor)",
+        title: "Veritabanına Yeni Bir Kullanıcı Kayıt Etme ve Şifre Doğrulama",
+        baseScore: 1500,
+        steps: [
+            { id: "step1", text: "Kullanıcıdan kayıt formundaki verileri (e-posta, şifre) al." },
+            { id: "step2", text: "Şifrenin en az 8 karakter, harf ve rakam içerdiğini doğrula." },
+            { id: "step3", text: "E-posta adresinin veritabanında önceden kayıtlı olup olmadığını kontrol et." },
+            { id: "step4", text: "Güvenlik için şifreyi geri döndürülemez bir algoritmaya (hash) sok." },
+            { id: "step5", text: "Kullanıcının verilerini (e-posta ve hashlenmiş şifre) veritabanına kaydet." },
+            { id: "step6", text: "Kullanıcıya 'Kayıt Başarılı' mesajı göster ve giriş sayfasına yönlendir." }
+        ]
+    },
+    {
+        id: 28,
+        badge: "Seviye 3 (zor)",
+        title: "Karşı Tarafı Sıkmayan Bir Sohbet Başlatma",
+        baseScore: 1500,
+        steps: [
+            { id: "step1", text: "Durduk yere yazmak yerine, paylaştığı bir story'den mantıklı bir konu yakala." },
+            { id: "step2", text: "Sade, net ve gereksiz iltifat barındırmayan bir tepki veya soru ilet." },
+            { id: "step3", text: "Mesajlara anında atlamak yerine doğal bir akışta, kendi meşguliyetinden vakit buldukça cevap ver." },
+            { id: "step4", text: "Konu bitmeye yakınsa uzatmak için zorlama, muhabbeti zirvede kes." },
+            { id: "step5", text: "Bu sayede gizemini koru ve bir sonraki sohbete açık kapı bırak." }
         ]
     },
     {
