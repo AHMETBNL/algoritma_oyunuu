@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     usernameInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') startGame();
     });
+    
+    // Start matrix background
+    initMatrixBackground();
 });
 
 function startGame() {
@@ -281,4 +284,80 @@ function triggerConfetti() {
     fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
     fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
     fire(0.1, { spread: 120, startVelocity: 45 });
+}
+
+// Matrix Background Animation
+function initMatrixBackground() {
+    const canvas = document.getElementById('matrixCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    // Make canvas full screen
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Characters for Matrix Rain (only 0 and 1)
+    const chars = '01';
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+
+    // Array to track the y coordinate of each column
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100; // start at random heights above screen
+    }
+
+    // Animation control
+    let lastTime = 0;
+    const fps = 3; // Lower FPS to make it very slow
+    const interval = 1000 / fps;
+
+    function draw(currentTime) {
+        requestAnimationFrame(draw);
+
+        const delta = currentTime - lastTime;
+
+        if (delta > interval) {
+            // Draw a semi-transparent black rectangle over the canvas to create the trail effect
+            ctx.fillStyle = 'rgba(18, 18, 18, 0.1)'; // Matches background color for fade effect
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#0F0'; // Neon green text
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                // Pick a random char
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+
+                // x = i * fontSize, y = drops[i] * fontSize
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // Reset drop if it reaches bottom or randomly
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                // Move drop down
+                drops[i]++;
+            }
+
+            lastTime = currentTime - (delta % interval);
+        }
+    }
+
+    // Start animation
+    requestAnimationFrame(draw);
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // Re-calculate columns and reset drops
+        const newColumns = Math.floor(canvas.width / fontSize);
+        for (let i = 0; i < newColumns; i++) {
+            if (i >= drops.length) {
+                drops[i] = Math.random() * -100;
+            }
+        }
+    });
 }

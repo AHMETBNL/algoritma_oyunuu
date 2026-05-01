@@ -27,6 +27,19 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    position: relative; /* ensure context for absolute/fixed children if needed */
+}
+
+/* Matrix Canvas */
+#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.25; /* Translucent */
 }
 
 .app-container {
